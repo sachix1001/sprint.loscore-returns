@@ -58,11 +58,6 @@ class LoScore {
     if (accumulator === undefined) {
       accumulator = collection[0];
       array2 = collection.slice(1);
-      // let result = accumulator;
-      // this.each(array2, (val) => {
-      //   result = iterator(result, val)
-      // });
-      // return result;
     }
     let result = accumulator;
     this.each(array2, (val) => {
@@ -71,16 +66,37 @@ class LoScore {
     return result;
   }
 
-  every() {
-    // YOUR CODE HERE
+  every(collection, test) {
+    if (test === undefined) {
+      test = (val) => val;
+    }
+    if (collection.length === 0) return true;
+    return this.reduce(
+      collection,
+      (acc, val) => {
+        if (test(val)) {
+          if (acc) {
+            return true;
+          }
+        }
+        return false;
+      },
+      true
+    );
   }
 
   /**
   | OBJECTS
   |~~~~~~~~~~
   * */
-  extend(obj) {
-    // YOUR CODE HERE
+  extend(target, ...sources) {
+    let result = target;
+    this.each(sources, (item) => {
+      for (let key in item) {
+        result[key] = item[key];
+      }
+    });
+    return result;
   }
 
   /**
