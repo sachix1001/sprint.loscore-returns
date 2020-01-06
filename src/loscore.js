@@ -130,7 +130,7 @@ class LoScore {
     if (typeof functionOrKey === "function") {
       return this.map(collection, (val) => functionOrKey.apply(val));
     }
-    return this.map(collection, (val) => val[functionOrKey].apply(val));
+    return this.map(collection, (val) => val[functionOrKey]());
   }
 
   /**
