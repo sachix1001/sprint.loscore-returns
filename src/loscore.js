@@ -53,10 +53,20 @@ class LoScore {
     return result;
   }
 
-  reduce(collection, iterator, accumulator = 0) {
-    const result = accumulator;
-    this.each(collection, () => {
-      return (result = iterator(result));
+  reduce(collection, iterator, accumulator) {
+    let array2 = collection;
+    if (accumulator === undefined) {
+      accumulator = collection[0];
+      array2 = collection.slice(1);
+      // let result = accumulator;
+      // this.each(array2, (val) => {
+      //   result = iterator(result, val)
+      // });
+      // return result;
+    }
+    let result = accumulator;
+    this.each(array2, (val) => {
+      result = iterator(result, val);
     });
     return result;
   }
