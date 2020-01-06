@@ -108,21 +108,29 @@ class LoScore {
     let isCalled = false;
     let result;
     return function() {
-      console.log(isCalled);
-      if (isCalled === true) return result;
+      if (isCalled) return result;
       isCalled = true;
       result = func();
-      console.log(result);
       return result;
     };
   }
 
   memoize(func) {
-    // YOUR CODE HERE
+    let cache = {};
+    return function(...val) {
+      let key = JSON.stringify([val]);
+      if (!cache[key]) {
+        cache[key] = func(val);
+      }
+      return cache[key];
+    };
   }
 
   invoke(collection, functionOrKey) {
-    // YOUR CODE HERE
+    if (typeof functionOrKey === "function") {
+      return this.map(collection, (val) => functionOrKey.apply(val));
+    }
+    return this.map(collection, (val) => val[functionOrKey].apply(val));
   }
 
   /**
