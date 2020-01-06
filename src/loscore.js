@@ -105,7 +105,16 @@ class LoScore {
   * */
 
   once(func) {
-    // YOUR CODE HERE
+    let isCalled = false;
+    let result;
+    return function() {
+      console.log(isCalled);
+      if (isCalled === true) return result;
+      isCalled = true;
+      result = func();
+      console.log(result);
+      return result;
+    };
   }
 
   memoize(func) {
