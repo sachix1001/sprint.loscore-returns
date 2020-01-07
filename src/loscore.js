@@ -90,9 +90,9 @@ class LoScore {
   |~~~~~~~~~~
   * */
   extend(target, ...sources) {
-    let result = target;
+    const result = target;
     this.each(sources, (item) => {
-      for (let key in item) {
+      for (const key in item) {
         result[key] = item[key];
       }
     });
@@ -116,9 +116,9 @@ class LoScore {
   }
 
   memoize(func) {
-    let cache = {};
+    const cache = {};
     return function(...val) {
-      let key = JSON.stringify([val]);
+      const key = JSON.stringify([val]);
       if (!cache[key]) {
         cache[key] = func(val);
       }
