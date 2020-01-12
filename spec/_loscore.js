@@ -750,4 +750,24 @@ describe("LoScore", () => {
       });
     });
   });
+  describe.only("advanced requirements", () => {
+    describe("sortBy", () => {
+      it("shold return an array", () => {
+        expect(_.sortBy([], (item) => item)).to.be.an("array");
+      });
+
+      it("shold not modify the input array", () => {
+        const input = [3, 5, 2, 7];
+        _.sortBy(input, (item) => item);
+        expect(input).to.eql([[3, 5, 2, 7]]);
+      });
+
+      it("shold sort given array", () => {
+        const result = _.sortBy([1, 2, 3, 4, 5, 6], (num) => {
+          return Math.sin(num);
+        });
+        expect(result).to.eql([5, 4, 6, 3, 1, 2]);
+      });
+    });
+  });
 });
